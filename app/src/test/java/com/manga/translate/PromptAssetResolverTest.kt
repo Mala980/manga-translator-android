@@ -67,7 +67,7 @@ class PromptAssetResolverTest {
 
         for (asset in CustomPromptStore.assets) {
             val builtIn = store.builtIn(context, asset)
-            assertTrue(asset.endsWith("_id.json"), "Missing Indonesian variant for $asset")
+            assertTrue("Missing Indonesian variant for $asset", asset.endsWith("_id.json"))
             assertTrue(CustomPromptStore.validate(builtIn, builtIn).isNotBlank())
         }
     }

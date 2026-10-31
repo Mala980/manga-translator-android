@@ -255,6 +255,7 @@
     <string name="ocr_settings_note_local">使用內建模型辨識文字，自動匹配語言。辨識俄語需關閉此項並設定 OCR API。</string>
     <string name="ocr_settings_note_api">使用 OpenAI 相容 OCR 介面辨識文字；地址、API Key 或模型留空時會重用主 API 的對應設定。</string>
     <string name="missing_ocr_api_settings">請先在主 API 或 OCR 設定中填寫 API 位址、Key 與模型名稱</string>
+    <string name="ocr_local_model_missing">本機 OCR 模型缺少：請將 models/ocr/PP-OCRv6_small_rec.onnx 放入 assets 後重新建置，或在設定中改用 OCR API。</string>
     <string name="llm_params_invalid">參數格式有誤，已忽略無效項</string>
     <string name="llm_params_note">留空將不傳送該欄位</string>
     <string name="thinking_length_button">思考長度</string>

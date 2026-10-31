@@ -241,6 +241,7 @@
     <string name="ocr_settings_note_local">Uses built-in models to recognize text, selected automatically for the language. For Russian, turn this off and configure the OCR API.</string>
     <string name="ocr_settings_note_api">Uses an OpenAI-compatible OCR API to recognize text. Leave the URL, API Key or model blank to reuse the corresponding main API setting.</string>
     <string name="missing_ocr_api_settings">Please fill in the API address, Key and model name in the main API or OCR settings first</string>
+    <string name="ocr_local_model_missing">Local OCR model is missing. Put models/ocr/PP-OCRv6_small_rec.onnx into assets and rebuild, or switch to the OCR API in Settings.</string>
     <string name="llm_params_invalid">The parameter format is incorrect, invalid items have been ignored</string>
     <string name="llm_params_note">Leave blank to not send this field</string>
     <string name="thinking_length_button">Thinking length</string>

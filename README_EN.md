@@ -74,6 +74,8 @@ Join the QQ group for questions and discussion: `1080302768`
 ./gradlew :app:assembleRelease
 ```
 
+CI (`.github/workflows/android-ci.yml`) extracts `assets/models` from the official release APK before building, so the artifact is not missing the local OCR/detection models. To use your own model package, set the repository variable `MODELS_APK_URL` to an APK or ZIP that contains `assets/models/`.
+
 ### Models and Assets
 Place the following model files into the corresponding subdirectories under `assets/`:
 - `models/detection/mixed-dual-s-e5_float16.tflite` (YOLO26s-seg bubble/text segmenter at 1472x1472, TFLite FP16)

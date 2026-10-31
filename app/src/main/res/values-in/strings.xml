@@ -256,6 +256,7 @@
     <string name="ocr_settings_note_local">Menggunakan model bawaan untuk mengenali teks, dipilih otomatis sesuai bahasa. Untuk bahasa Rusia, nonaktifkan opsi ini dan konfigurasikan API OCR.</string>
     <string name="ocr_settings_note_api">Menggunakan API OCR kompatibel OpenAI untuk mengenali teks. Biarkan URL, API Key, atau model kosong untuk memakai pengaturan API utama yang sesuai.</string>
     <string name="missing_ocr_api_settings">Isi alamat API, Key, dan nama model di API utama atau pengaturan OCR terlebih dahulu</string>
+    <string name="ocr_local_model_missing">Model OCR lokal tidak ditemukan. Letakkan models/ocr/PP-OCRv6_small_rec.onnx di assets lalu bangun ulang, atau gunakan API OCR di Pengaturan.</string>
     <string name="llm_params_invalid">Format parameter salah, item yang tidak valid diabaikan</string>
     <string name="llm_params_note">Biarkan kosong agar kolom ini tidak dikirim</string>
     <string name="thinking_length_button">Panjang pemikiran</string>

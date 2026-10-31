@@ -206,6 +206,9 @@ internal class TranslationPipeline(
             return@withContext null
         }
         if (useLocalOcr && ocrEngine == null) {
+            val message = appContext.getString(R.string.ocr_local_model_missing)
+            AppLogger.log("Pipeline", message)
+            onProgress(message)
             return@withContext null
         }
         trace.measure("decode") { PipelineBitmapDecoder.openCropSource(imageFile) }?.use { cropSource ->

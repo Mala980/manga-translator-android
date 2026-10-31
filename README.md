@@ -75,6 +75,8 @@
 ./gradlew :app:assembleRelease
 ```
 
+CI（`.github/workflows/android-ci.yml`）会在构建前自动从官方发布 APK 提取 `assets/models`，避免产出缺少本地 OCR/检测模型的 APK。如需使用自己的模型包，可设置仓库变量 `MODELS_APK_URL`，指向包含 `assets/models/` 的 APK 或 ZIP。
+
 ### 模型与资源
 将以下模型文件放入 `assets/` 对应子目录：
 - `models/detection/mixed-dual-s-e5_float16.tflite`（气泡/文字双标签分割，YOLO26s-seg，1472×1472 TFLite FP16）

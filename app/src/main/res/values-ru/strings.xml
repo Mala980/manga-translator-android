@@ -242,6 +242,7 @@
     <string name="ocr_settings_note_local">Распознаёт текст встроенными моделями, автоматически выбирая их по языку. Для русского языка отключите эту опцию и настройте API OCR.</string>
     <string name="ocr_settings_note_api">Распознаёт текст через API OCR, совместимый с OpenAI. Оставьте адрес, ключ или модель пустыми, чтобы использовать соответствующие настройки основной API.</string>
     <string name="missing_ocr_api_settings">Сначала введите адрес API, Key и название модели в основных настройках API или настройках OCR.</string>
+    <string name="ocr_local_model_missing">Локальная модель OCR отсутствует. Поместите models/ocr/PP-OCRv6_small_rec.onnx в assets и пересоберите приложение или включите OCR API в настройках.</string>
     <string name="llm_params_invalid">Неверный формат параметра, недопустимые элементы проигнорированы.</string>
     <string name="llm_params_note">Оставьте пустым, чтобы не отправлять это поле</string>
     <string name="thinking_length_button">Длина мышления</string>

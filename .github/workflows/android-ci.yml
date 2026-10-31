@@ -44,11 +44,37 @@ jobs:
           yes | sdkmanager --licenses > /dev/null || true
           sdkmanager --install "platforms;android-37.0" "build-tools;37.0.0"
 
+      # The model binaries are not tracked in this repository. Without them the APK
+      # installs but local OCR/detection fails at runtime, so provision them from the
+      # official release package (or MODELS_APK_URL) before building.
+      - name: Provision OCR and detection models
+        env:
+          MODELS_APK_URL: ${{ vars.MODELS_APK_URL }}
+        run: |
+          if [ -f assets/models/ocr/PP-OCRv6_small_rec.onnx ]; then
+            echo "Model assets already present."
+            exit 0
+          fi
+          URL="${MODELS_APK_URL:-https://github.com/jedzqer/manga-translator-android/releases/download/v3.7.6/app-release.apk}"
+          echo "Downloading model assets from $URL"
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/models-package" "$URL"
+          unzip -q "$RUNNER_TEMP/models-package" 'assets/models/*' -d "$RUNNER_TEMP/models"
+          mkdir -p assets
+          cp -R "$RUNNER_TEMP/models/assets/models" assets/models
+          test -f assets/models/detection/mixed-dual-s-e5_float16.tflite
+          test -f assets/models/ocr/PP-OCRv6_small_rec.onnx
+
       - name: Run unit tests
         run: ./gradlew :app:testDebugUnitTest --no-daemon --stacktrace
 
       - name: Assemble debug APK
         run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
+
+      - name: Verify bundled model assets
+        run: |
+          APK=app/build/outputs/apk/debug/app-debug.apk
+          unzip -l "$APK" | grep -q "assets/models/detection/mixed-dual-s-e5_float16.tflite"
+          unzip -l "$APK" | grep -q "assets/models/ocr/PP-OCRv6_small_rec.onnx"
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v7

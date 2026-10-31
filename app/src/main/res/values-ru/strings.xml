@@ -610,6 +610,7 @@
     <string name="language_english">Английский</string>
     <string name="language_russian">Русский</string>
     <string name="language_portuguese_brazil">Бразильский португальский</string>
+    <string name="language_indonesian">Индонезийский</string>
     <string name="floating_region_full_screen">Весь экран</string>
     <string name="floating_region_margin_value">%1$s: %2$d</string>
     <string name="floating_region_configuration_note">Выделите область движением пальца и нажмите «Подтвердить». Действует со следующего перевода. Можно выделить заново; ширина и высота — не менее 10% экрана.</string>

@@ -609,6 +609,7 @@ Grupo de comunicação e feedback: %2$s</string>
     <string name="language_english">Inglês</string>
     <string name="language_russian">Russo</string>
     <string name="language_portuguese_brazil">Português (Brasil)</string>
+    <string name="language_indonesian">Indonésio</string>
     <string name="floating_region_full_screen">Tela inteira</string>
     <string name="floating_region_margin_value">%1$s: %2$d</string>
     <string name="floating_region_configuration_note">Arraste para selecionar e toque em Confirmar. Vale para a próxima tradução. É possível refazer; largura e altura devem ocupar ao menos 10% da tela.</string>

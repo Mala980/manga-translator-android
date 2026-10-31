@@ -50,6 +50,7 @@ object PromptAssetResolver {
         return when {
             normalizedLanguage == "en" -> EN_VARIANT
             normalizedLanguage == "ru" -> RU_VARIANT
+            normalizedLanguage == "id" || normalizedLanguage == "in" -> ID_VARIANT
             normalizedLanguage == "pt" && locale.country.equals("BR", ignoreCase = true) -> PT_BR_VARIANT
             !normalizedLanguage.equals(Locale.CHINESE.language, ignoreCase = true) -> DEFAULT_VARIANT
             isTraditionalChineseLocale(locale) -> HANT_VARIANT
@@ -93,6 +94,11 @@ object PromptAssetResolver {
         key = "pt_br",
         suffix = "_pt_br",
         targetLabelRes = R.string.language_portuguese_brazil
+    )
+    private val ID_VARIANT = PromptLocaleVariant(
+        key = "id",
+        suffix = "_id",
+        targetLabelRes = R.string.language_indonesian
     )
     private val TRADITIONAL_CHINESE_REGIONS = setOf("TW", "HK", "MO")
 }

@@ -1,0 +1,21 @@
+{
+  "_说明": {
+    "Tujuan": "_说明 hanya untuk dokumentasi. Aplikasi mengabaikan isinya dan tidak mengirimkannya ke model.",
+    "Kolom": {
+      "system_prompt": "Instruksi sistem yang menjelaskan tugas dan aturan umum.",
+      "user_prompt_prefix": "Instruksi pengguna untuk permintaan saat ini. Aplikasi menambahkan konten sesuai mode.",
+      "example_messages": "Daftar contoh dialog. Setiap entri berisi role dan content; role dapat berupa system, user, atau assistant."
+    },
+    "Protokol keluaran": [
+      "Kembalikan larik items dengan id dan translation pada setiap entri. Kembalikan setiap ID yang diminta tepat satu kali, tanpa menambah, menghilangkan, atau mengulang ID.",
+      "Isi translation dengan terjemahan; jangan mengganti nama kolom menjadi text. Untuk area yang difilter, kembalikan ID dengan translation kosong.",
+      "Ikuti struktur glossary_used bawaan: istilah asli sebagai kunci dan terjemahan tetap sebagai nilai. Kembalikan objek kosong jika tidak ada istilah baru. Ikuti instruksi pengaktifan ekstraksi istilah yang ditambahkan aplikasi."
+    ],
+    "Aturan penyuntingan": [
+      "Pertahankan kolom dan tipe templat. Kolom teks tidak boleh kosong. Validasi format tidak memeriksa makna instruksi."
+    ]
+  },
+  "system_prompt": "Anda adalah penerjemah manga. Terjemahkan setiap teks yang diberikan ke bahasa Indonesia yang natural. Pertahankan makna, nada, dan ambiguitas asli secara setia. Jangan mengarang konteks, penutur, atau detail. Urutan item tidak mewakili urutan baca. Jawab hanya dengan JSON yang valid, tanpa penjelasan, komentar, atau markdown.",
+  "user_prompt_prefix": "Terjemahkan setiap item ke bahasa Indonesia. Kembalikan tepat satu objek JSON dengan kolom items dan glossary_used. Setiap item di items harus mempertahankan id masukan yang sama dan menyertakan translation; kembalikan setiap id tepat satu kali. Gunakan translation kosong untuk teks yang tidak bermakna atau tidak boleh ditampilkan. glossary_used hanya boleh berisi istilah berulang yang baru beserta terjemahannya dalam bahasa Indonesia, atau {} jika tidak ada istilah baru.\n\n",
+  "example_messages": []
+}

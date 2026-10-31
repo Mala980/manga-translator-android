@@ -29,6 +29,7 @@ Tutorial: [English Tutorial](./Tutorial/Tutorial_EN.md) | [Simplified Chinese Tu
   - English UI -> English
   - Russian UI -> Russian
   - Brazilian Portuguese UI -> Brazilian Portuguese
+  - Indonesian UI -> Indonesian
 - Source language for each folder can be set independently in the library and supports: Japanese, English, Korean, Simplified Chinese, Traditional Chinese, Chinese-English mixed, French, Spanish, Portuguese, German, Italian, Russian
 - When the app UI is switched to Traditional Chinese, it will prioritize Traditional Chinese prompts
 

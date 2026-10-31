@@ -44,4 +44,17 @@ class AppLanguageTest {
         assertFalse(AppLanguage.hasSupportedSystemLanguage(LocaleListCompat.forLanguageTags("pt-PT")))
         assertFalse(AppLanguage.hasSupportedSystemLanguage(LocaleListCompat.forLanguageTags("fr-FR")))
     }
+
+    @Test
+    fun `indonesian language is selectable and follows the system locale`() {
+        assertEquals("id", AppLanguage.INDONESIAN.prefValue)
+        assertEquals("id", AppLanguage.INDONESIAN.toLocales().toLanguageTags())
+        assertTrue(AppLanguage.hasSupportedSystemLanguage(LocaleListCompat.forLanguageTags("id-ID")))
+        assertTrue(AppLanguage.hasSupportedSystemLanguage(LocaleListCompat.forLanguageTags("in-ID")))
+        assertTrue(
+            AppLanguage.FOLLOW_SYSTEM.resolveApplicationLocales(
+                LocaleListCompat.forLanguageTags("id-ID")
+            ).isEmpty
+        )
+    }
 }

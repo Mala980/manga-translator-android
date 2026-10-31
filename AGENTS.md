@@ -58,9 +58,9 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 - 用户可见文案不得硬编码在 Kotlin 或布局中，必须写入资源。
 - 日常功能和修复至少同步更新基础资源 `app/src/main/res/values/strings.xml`（简体中文）。
-- 新增或修改用户可见文案时，必须同步补齐全部四套语言资源（`values-b+zh+Hant`、`values-en`、`values-pt-rBR`、`values-ru`）；只更新简体中文会导致其他界面语言回退。非英语语言资源中与英文逐字相同的长文案属于未翻译缺口，不得引入。
+- 新增或修改用户可见文案时，必须同步补齐全部语言资源（`values-b+zh+Hant`、`values-en`、`values-in`、`values-pt-rBR`、`values-ru`）；只更新简体中文会导致其他界面语言回退。非英语语言资源中与英文逐字相同的长文案属于未翻译缺口，不得引入。
 - 新增界面语言时，必须同时接入 `model/AppLanguage.kt`、`res/xml/locales_config.xml`、对应 `values-*` 资源，以及该语言需要的 Prompt 变体。
-- 当前覆盖资源为繁体中文、英语、巴西葡萄牙语和俄语；繁体 Prompt 通过 `PromptAssetResolver` 优先解析 `_hant` 变体，缺失时回退基础文件。
+- 当前覆盖资源为繁体中文、英语、巴西葡萄牙语、俄语和印度尼西亚语；繁体 Prompt 通过 `PromptAssetResolver` 优先解析 `_hant` 变体，缺失时回退基础文件。
 
 ### 依赖与共享实例
 

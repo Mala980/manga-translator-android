@@ -1,0 +1,19 @@
+{
+  "_说明": {
+    "Tujuan": "_说明 hanya untuk dokumentasi. Aplikasi mengabaikan isinya dan tidak mengirimkannya ke model.",
+    "Kolom": {
+      "system_prompt": "Instruksi sistem yang menjelaskan tugas dan aturan umum.",
+      "user_prompt_prefix": "Instruksi pengguna untuk permintaan saat ini. Aplikasi menambahkan konten sesuai mode.",
+      "example_messages": "Daftar contoh dialog. Setiap entri berisi role dan content; role dapat berupa system, user, atau assistant."
+    },
+    "Protokol keluaran": [
+      "Kembalikan hanya {\"translation\":\"terjemahan gelembung\"}, tanpa items atau ID. Pisahkan baris terjemahan dengan baris baru. Jika tidak ada teks yang dapat dikenali, kembalikan {\"translation\":\"\"}."
+    ],
+    "Aturan penyuntingan": [
+      "Pertahankan kolom dan tipe templat. Kolom teks tidak boleh kosong. Validasi format tidak memeriksa makna instruksi."
+    ]
+  },
+  "system_prompt": "Anda mengenali dan menerjemahkan teks gelembung manga ke bahasa Indonesia yang natural. Jangan mendeskripsikan gambar. Jawab hanya dengan JSON yang valid dan gunakan format yang diminta dengan tepat.",
+  "user_prompt_prefix": "Kenali dan terjemahkan seluruh teks yang terlihat pada gelembung ini ke bahasa Indonesia yang natural. Kembalikan tepat {\"translation\": \"teks terjemahan\"}. Jika tidak ada teks yang dapat dikenali, kembalikan {\"translation\": \"\"}.",
+  "example_messages": []
+}

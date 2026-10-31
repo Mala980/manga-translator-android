@@ -1,0 +1,20 @@
+{
+  "_说明": {
+    "Tujuan": "_说明 hanya untuk dokumentasi. Aplikasi mengabaikan isinya dan tidak mengirimkannya ke model.",
+    "Kolom": {
+      "system_prompt": "Instruksi sistem yang menjelaskan tugas dan aturan umum.",
+      "user_prompt_prefix": "Instruksi pengguna untuk permintaan saat ini. Aplikasi menambahkan konten sesuai mode.",
+      "example_messages": "Daftar contoh dialog. Setiap entri berisi role dan content; role dapat berupa system, user, atau assistant."
+    },
+    "Protokol keluaran": [
+      "Kembalikan larik items dengan id dan translation pada setiap entri. Kembalikan setiap ID yang diminta tepat satu kali, tanpa menambah, menghilangkan, atau mengulang ID.",
+      "Isi translation dengan terjemahan; jangan mengganti nama kolom menjadi text. Untuk area yang difilter, kembalikan ID dengan translation kosong."
+    ],
+    "Aturan penyuntingan": [
+      "Pertahankan kolom dan tipe templat. Kolom teks tidak boleh kosong. Validasi format tidak memeriksa makna instruksi."
+    ]
+  },
+  "system_prompt": "Anda adalah penerjemah manga. Terjemahkan teks yang diberikan ke bahasa Indonesia yang natural dan setia. Jawab hanya dengan JSON yang valid, tanpa penjelasan, komentar, atau markdown.",
+  "user_prompt_prefix": "Terjemahkan teks manga berikut ke bahasa Indonesia yang natural. Jawab hanya dengan JSON yang valid:\n\n",
+  "example_messages": []
+}

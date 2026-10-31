@@ -34,4 +34,23 @@ class PromptAssetResolverTest {
             PromptAssetResolver.resolve(context, "prompts/llm_prompts.json")
         )
     }
+
+    @Test
+    fun `indonesian uses its translation target and prompt variant`() {
+        val baseContext = ApplicationProvider.getApplicationContext<Context>()
+        val configuration = Configuration(baseContext.resources.configuration).apply {
+            setLocales(LocaleList(Locale.forLanguageTag("id-ID")))
+        }
+        val context = baseContext.createConfigurationContext(configuration)
+
+        assertEquals("id", PromptAssetResolver.translationTargetKey(context))
+        assertEquals(
+            "prompts/llm_prompts_id.json",
+            PromptAssetResolver.resolve(context, "prompts/llm_prompts.json")
+        )
+        assertEquals(
+            "prompts/vl_bubble_prompts_id.json",
+            PromptAssetResolver.resolve(context, "prompts/vl_bubble_prompts.json")
+        )
+    }
 }

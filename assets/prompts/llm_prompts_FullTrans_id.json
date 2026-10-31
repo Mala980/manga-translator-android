@@ -1,0 +1,13 @@
+{
+  "_说明": {
+    "Dokumentasi": "Masukan terjemahan cepat penuh: items, glossary, synopsis. Keluaran: items[{id,translation}] dan glossary_used. Pertahankan {{STYLE_HINT}}. Ringkasan berfungsi sebagai konteks, bukan teks yang diterjemahkan."
+  },
+  "system_prompt": "Terjemahkan dialog manga ke bahasa Indonesia secara setia. Kembalikan hanya JSON.",
+  "user_prompt_prefix": "items berisi id dan text; glossary berisi terjemahan wajib; synopsis adalah konteks tersimpan yang diperbarui terus-menerus dan hanya untuk terjemahan cepat penuh. Gunakan ringkasan hanya untuk memahami informasi yang eksplisit, tanpa menggantikan teks asli atau mengarang dialog. Urutan gelembung tidak menentukan urutan dialog. Pertahankan ambiguitas, tanpa menyimpulkan penutur, gender, atau hubungan. Kembalikan items (id, translation) dengan setiap ID masukan tepat satu kali. Untuk teks tanpa makna, pertahankan ID dengan terjemahan kosong. Kembalikan juga glossary_used yang hanya berisi nama diri baru beserta terjemahannya. Jangan mengembalikan atau memperluas ringkasan.\n\n",
+  "example_messages": [
+    {
+      "role": "user",
+      "content": "{{STYLE_HINT}}"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "_说明": {
+    "Dokumentasi": "Terjemahan cepat penuh mengekstrak istilah dan memperbarui ringkasan singkat pada setiap jendela. Jika masukan berisi synopsis, kembalikan glossary_used dan synopsis; jika tidak, hanya glossary_used. Ringkasan disimpan ke berkas dan digunakan kembali serta diperbarui saat melanjutkan terjemahan."
+  },
+  "system_prompt": "Analisis teks manga dan ekstrak terjemahan nama diri yang konsisten. Kembalikan hanya JSON. Tulis terjemahan dan ringkasan dalam bahasa Indonesia.",
+  "user_prompt_prefix": "text berisi dialog yang dikelompokkan per halaman; glossary berisi terjemahan yang sudah ada dan wajib dipakai. Kembalikan di glossary_used hanya nama diri baru beserta terjemahan tetapnya, tanpa mengulang atau mengubah entri lama dan tanpa mengekstrak kata umum. Hanya jika masukan berisi synopsis, kembalikan juga string synopsis yang diperbarui. Ringkasan hanya untuk terjemahan cepat penuh. Gunakan beberapa paragraf jika perlu, maksimal 6000 karakter. Pertahankan peristiwa penting, hubungan, motivasi, dan pertanyaan yang belum terjawab; ringkas detail lama saat mendekati batas. Ringkas synopsis sebelumnya dengan fakta baru yang eksplisit, sambil mempertahankan peristiwa penting dan hubungan yang sudah terkonfirmasi. Jangan membuat daftar per halaman, mengulang peristiwa lama, atau menyimpulkan penutur, gender, urutan dialog, maupun fakta yang tidak dinyatakan. Jika tidak ada fakta baru, pertahankan synopsis sebelumnya.\n\n",
+  "example_messages": []
+}

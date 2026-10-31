@@ -17,7 +17,8 @@ enum class AppLanguage(
     TRADITIONAL_CHINESE("zh_hant", R.string.language_traditional_chinese, "zh-Hant"),
     ENGLISH("en", R.string.language_english, "en"),
     RUSSIAN("ru", R.string.language_russian, "ru"),
-    PORTUGUESE_BRAZIL("pt_br", R.string.language_portuguese_brazil, "pt-BR");
+    PORTUGUESE_BRAZIL("pt_br", R.string.language_portuguese_brazil, "pt-BR"),
+    INDONESIAN("id", R.string.language_indonesian, "id");
 
     fun toLocales(): LocaleListCompat {
         return if (languageTags.isNullOrBlank()) {
@@ -62,6 +63,6 @@ enum class AppLanguage(
                 (language == "pt" && locale.country.equals("BR", ignoreCase = true))
         }
 
-        private val SUPPORTED_SYSTEM_LANGUAGES = setOf("zh", "en", "ru")
+        private val SUPPORTED_SYSTEM_LANGUAGES = setOf("zh", "en", "ru", "id", "in")
     }
 }

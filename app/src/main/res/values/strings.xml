@@ -70,6 +70,7 @@
     <string name="language_english">英语</string>
     <string name="language_russian">俄语</string>
     <string name="language_portuguese_brazil">巴西葡萄牙语</string>
+    <string name="language_indonesian">印度尼西亚语</string>
     <string name="reading_display_button">阅读设置</string>
     <string name="reading_display_title">阅读显示</string>
     <string name="reading_display_format">阅读显示：%1$s</string>

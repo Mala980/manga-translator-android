@@ -33,6 +33,7 @@ import com.manga.translate.model.ReadingDisplayMode
 import com.manga.translate.model.ReadingPageAnimationMode
 import com.manga.translate.model.ThemeMode
 import com.manga.translate.network.LlmRequestException
+import com.manga.translate.network.LocalNetworkAccess
 import com.manga.translate.platform.AppLogger
 import com.manga.translate.rendering.BubbleFont
 import com.manga.translate.settings.CustomRequestParameter
@@ -568,11 +569,17 @@ class SettingsFragment : Fragment(), BackupOperationCancelHost, BackupExportOpti
     }
 
     private fun updateLocalNetworkPermissionVisibility() {
-        val usesHttp = binding.apiUrlInput.text.toString().trim().startsWith("http://", ignoreCase = true) ||
-            settingsStore.loadOcrApiSettings().apiUrl.trim().startsWith("http://", ignoreCase = true) ||
-            settingsStore.loadFloatingTranslateApiSettings().apiUrl.trim().startsWith("http://", ignoreCase = true)
+        val urls = listOf(
+            binding.apiUrlInput.text.toString().trim(),
+            settingsStore.loadOcrApiSettings().apiUrl.trim(),
+            settingsStore.loadFloatingTranslateApiSettings().apiUrl.trim()
+        )
+        // Android 17 needs ACCESS_LOCAL_NETWORK for private/LAN hosts even over HTTPS.
+        val needsLocalAccess = urls.any {
+            it.startsWith("http://", ignoreCase = true) || LocalNetworkAccess.isLocalEndpoint(it)
+        }
         binding.localNetworkPermissionButton.visibility =
-            if (Build.VERSION.SDK_INT >= 37 && usesHttp) View.VISIBLE else View.GONE
+            if (Build.VERSION.SDK_INT >= 37 && needsLocalAccess) View.VISIBLE else View.GONE
     }
 
     internal fun reloadSettingsUiFromStore() {

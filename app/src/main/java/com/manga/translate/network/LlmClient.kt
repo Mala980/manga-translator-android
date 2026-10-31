@@ -1,7 +1,10 @@
 package com.manga.translate.network
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.os.Build
 import com.manga.translate.R
 import com.manga.translate.model.ApiFormat
 import com.manga.translate.model.TranslationLanguage
@@ -225,6 +228,7 @@ class LlmClient(
     private suspend fun recognizeWithOpenAi(ocrSettings: OcrApiSettings, image: Bitmap,
         requestedIds: List<Int>? = null): String? {
         val endpoint = EndpointBuilder.buildOpenAiCompatibleChatEndpoint(ocrSettings.apiUrl)
+        warnIfLocalNetworkPermissionMissing(endpoint)
         val payload = payloadBuilder.buildImageOcrPayload(ocrSettings, image, requestedIds)
         val timeoutMs = ocrSettings.timeoutSeconds * 1000
         var lastErrorCode: String? = null
@@ -514,6 +518,7 @@ class LlmClient(
     ): String? {
         val selectedModel = settings.modelName.trim()
         val endpoint = EndpointBuilder.buildEndpoint(settings, selectedModel)
+        warnIfLocalNetworkPermissionMissing(endpoint)
         val payload = buildPayload()
         val sanitizeForLog: (String) -> String = sanitizePayloadForLog ?: { it }
         val logModelIo = settingsStore.loadModelIoLogging()
@@ -524,6 +529,7 @@ class LlmClient(
         val retries = retryPolicy.maxAttempts
         var lastErrorCode: String? = null
         var lastErrorBody: String? = null
+        var lastNetworkErrorDetail: String? = null
         var lastResponseException: LlmResponseException? = null
         val requestTrace = RequestPerfTrace(
             tag = "LlmClient",
@@ -534,6 +540,7 @@ class LlmClient(
             currentCoroutineContext().ensureActive()
             lastErrorCode = null
             lastErrorBody = null
+            lastNetworkErrorDetail = null
             lastResponseException = null
             val attemptTimeoutMs = budget.attemptTimeoutMs(timeoutMs)
             currentCoroutineContext()[TextAttemptBudget]?.consume()
@@ -609,6 +616,7 @@ class LlmClient(
                 AppLogger.log("LlmClient", "Request failed on ${redactEndpoint(endpoint)} (attempt $attempt)", e)
                 requestTrace.recordStatus(LlmErrorCode.NetworkError.value)
                 lastErrorCode = LlmErrorCode.NetworkError.value
+                lastNetworkErrorDetail = e.message
                 null
             }
             currentCoroutineContext().ensureActive()
@@ -639,7 +647,7 @@ class LlmClient(
                         "LlmClient",
                         "Request failed on ${redactEndpoint(endpoint)}: $lastErrorCode, body=${responseParser.summarizeBody(lastErrorBody)}"
                     )
-                    throw LlmRequestException(LlmErrorCode.from(errorCode), lastErrorBody)
+                    throw LlmRequestException(LlmErrorCode.from(errorCode), lastErrorBody ?: lastNetworkErrorDetail)
                 }
                 requestTrace.logSummary("empty")
                 return null
@@ -662,6 +670,7 @@ class LlmClient(
             ApiFormat.OPENAI_RESPONSES -> EndpointBuilder.buildOpenAiCompatibleModelsEndpoint(apiUrl)
             ApiFormat.GEMINI -> EndpointBuilder.buildGeminiModelsEndpoint(apiUrl, apiKey)
         }
+        warnIfLocalNetworkPermissionMissing(endpoint)
         val timeoutMs = settingsStore.loadApiTimeoutMs()
         var lastErrorCode: String? = null
         var lastErrorBody: String? = null
@@ -725,6 +734,22 @@ class LlmClient(
 
     private fun redactEndpoint(endpoint: String): String =
         EndpointBuilder.redactEndpoint(endpoint)
+
+    /**
+     * Android 17 blocks local network requests without `ACCESS_LOCAL_NETWORK`. Logging the
+     * reason makes a failed translation traceable without changing the request itself.
+     */
+    private fun warnIfLocalNetworkPermissionMissing(endpoint: String) {
+        if (Build.VERSION.SDK_INT < 37 || !LocalNetworkAccess.isLocalEndpoint(endpoint)) return
+        val granted = appContext.checkSelfPermission(Manifest.permission.ACCESS_LOCAL_NETWORK) ==
+            PackageManager.PERMISSION_GRANTED
+        if (granted) return
+        AppLogger.log(
+            "LlmClient",
+            "ACCESS_LOCAL_NETWORK is not granted for ${redactEndpoint(endpoint)}; " +
+                "requests to local AI / OCR services will fail"
+        )
+    }
 
     companion object {
         internal fun buildOpenAiCompatibleChatEndpoint(baseUrl: String): String {

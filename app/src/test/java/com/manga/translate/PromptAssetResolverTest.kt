@@ -5,8 +5,10 @@ import android.content.res.Configuration
 import android.os.LocaleList
 import androidx.test.core.app.ApplicationProvider
 import com.manga.translate.platform.PromptAssetResolver
+import com.manga.translate.settings.CustomPromptStore
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.Locale
@@ -52,5 +54,21 @@ class PromptAssetResolverTest {
             "prompts/vl_bubble_prompts_id.json",
             PromptAssetResolver.resolve(context, "prompts/vl_bubble_prompts.json")
         )
+    }
+
+    @Test
+    fun `indonesian prompt templates resolve and pass built-in validation`() {
+        val baseContext = ApplicationProvider.getApplicationContext<Context>()
+        val configuration = Configuration(baseContext.resources.configuration).apply {
+            setLocales(LocaleList(Locale.forLanguageTag("id-ID")))
+        }
+        val context = baseContext.createConfigurationContext(configuration)
+        val store = CustomPromptStore(context)
+
+        for (asset in CustomPromptStore.assets) {
+            val builtIn = store.builtIn(context, asset)
+            assertTrue(asset.endsWith("_id.json"), "Missing Indonesian variant for $asset")
+            assertTrue(CustomPromptStore.validate(builtIn, builtIn).isNotBlank())
+        }
     }
 }
